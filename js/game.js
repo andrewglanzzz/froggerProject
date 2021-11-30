@@ -17,7 +17,10 @@ gameScene.create = function() {
     background.setOrigin(0,0);
 
     // adding player
-    this.player = this.add.sprite(180, 700, 'player');
+    this.player = this.add.sprite(180, 720, 'player');
+
+    // scale down player sprite
+    this.player.setScale(.75);
 
 }
 

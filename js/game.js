@@ -1,0 +1,1 @@
+let gameScene = new Phaser.Scene('Game');

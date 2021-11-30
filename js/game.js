@@ -5,7 +5,7 @@ gameScene.preload = function () {
     // preloading our sprites
     this.load.image('background', 'assets/background.png');
 
-    this.load.image('player', 'assets/player.png');
+    this.load.image('player', 'assets/frog.png');
 
 }
 

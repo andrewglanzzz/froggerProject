@@ -1,3 +1,4 @@
+// instantiate gameScene
 let gameScene = new Phaser.Scene('Game');
 
 gameScene.preload = function () {
@@ -5,7 +6,7 @@ gameScene.preload = function () {
     this.load.image('background', 'assets/background.png');
 
     this.load.image('player', 'assets/player.png');
-    
+
 }
 
 gameScene.create = function() {

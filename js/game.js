@@ -20,3 +20,18 @@ gameScene.create = function() {
     this.player = this.add.sprite(180, 10, 'player');
 
 }
+
+
+
+
+
+// game config
+let config = {
+    type: Phaser.AUTO,
+    width: 360,
+    height: 750,
+    scene: gameScene
+};
+
+// game creation
+let game = new Phaser.Game(config);

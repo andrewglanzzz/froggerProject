@@ -21,12 +21,14 @@ gameScene.create = function() {
     // adding player
     this.player = this.add.sprite(180, 720, 'player');
 
-    // scale down player sprite
-    this.player.setScale(.80);
+    // scale up player sprite
+    this.player.setScale(1.1);
 
     // adding enemy for scaling purposes, location is obviously not finalized
     this.rocket = this.add.sprite(50, 650, 'rocket');
 
+    // scale up rocket sprite
+    this.rocket.setScale(1.5);
 }
 
 

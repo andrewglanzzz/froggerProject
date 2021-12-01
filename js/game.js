@@ -7,13 +7,15 @@ gameScene.preload = function () {
 
     this.load.image('player', 'assets/frog.png');
 
+    this.load.image('rocket', 'assets/rocket.png')
+
 }
 
 gameScene.create = function() {
     // adding background to page
     let background = this.add.sprite(0,0, 'background');
 
-    //setting origin to top left
+    // setting origin to top left
     background.setOrigin(0,0);
 
     // adding player
@@ -21,6 +23,9 @@ gameScene.create = function() {
 
     // scale down player sprite
     this.player.setScale(.80);
+
+    // adding enemy for scaling purposes, location is obviously not finalized
+    this.rocket = this.add.sprite(50, 650, 'rocket');
 
 }
 

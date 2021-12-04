@@ -45,7 +45,7 @@ gameScene.create = function() {
     this.asteroid1.setScale(2);
     this.asteroid2.setScale(2);
 
-    // WASD movement
+    // WASD movement... does not work right now
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -53,7 +53,7 @@ gameScene.create = function() {
 
 }
   
-  function update() {
+  function update() { // this goes along with the WASD movement in create(), does not work. if someone wanted to try to work on it that would be awesome.
     this.player.setVelocity(0);
   
     if (keyA.isDown) {

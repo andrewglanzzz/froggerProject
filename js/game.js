@@ -7,7 +7,11 @@ gameScene.preload = function () {
 
     this.load.image('player', 'assets/frog.png');
 
-    this.load.image('rocket', 'assets/rocket.png')
+    this.load.image('rocket', 'assets/rocket.png');
+
+    this.load.image('asteroid1', 'assets/asteroid1.png');
+
+    this.load.image('asteroid2', 'assets/asteroid2.png');
 
 }
 
@@ -24,11 +28,15 @@ gameScene.create = function() {
     // scale up player sprite
     this.player.setScale(1.5);
 
-    // adding enemy for scaling purposes, location is obviously not finalized
+    // adding enemies for scaling purposes, location is obviously not finalized
     this.rocket = this.add.sprite(50, 650, 'rocket');
-
-    // scale up rocket sprite
+    this.asteroid1 = this.add.sprite(100, 650, 'asteroid1');
+    this.asteroid2 = this.add.sprite(150, 650, 'asteroid2');
+    
+    // scale up enemy sprites
     this.rocket.setScale(2.25);
+    this.asteroid1.setScale(2.25);
+    this.asteroid2.setScale(2.25);
 }
 
 

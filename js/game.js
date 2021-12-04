@@ -32,11 +32,41 @@ gameScene.create = function() {
     this.rocket = this.add.sprite(50, 650, 'rocket');
     this.asteroid1 = this.add.sprite(100, 650, 'asteroid1');
     this.asteroid2 = this.add.sprite(150, 650, 'asteroid2');
-    
+
     // scale up enemy sprites
     this.rocket.setScale(2.25);
     this.asteroid1.setScale(2.25);
     this.asteroid2.setScale(2.25);
+
+    // testing player movement, might remove
+    let keys = this.input.keyboard.addKeys("W,A,S,D");
+
+    // Same:
+    // keys = this.input.keyboard.addKeys({ W: 'W', A: 'A', S: 'S', D: 'D' });
+  
+    // Named keys:
+    // keys = this.input.keyboard.addKeys({ up: 'W', left: 'A', down: 'S', right: 'D' });
+  
+    console.log("keys", keys);
+  
+    player = this.physics.add.image(200, 150, "player");
+    player.setCollideWorldBounds(true);
+    
+  
+  function update() {
+    player.setVelocity(0);
+  
+    if (keys.A.isDown) {
+      player.setVelocityX(-300);
+    } else if (keys.D.isDown) {
+      player.setVelocityX(300);
+    }
+  
+    if (keys.W.isDown) {
+      player.setVelocityY(-300);
+    } else if (keys.S.isDown) {
+      player.setVelocityY(300);
+    }
 }
 
 

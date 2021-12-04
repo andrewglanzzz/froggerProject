@@ -50,21 +50,22 @@ gameScene.create = function() {
     keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    }
+
+}
   
   function update() {
-    player.setVelocity(0);
+    this.player.setVelocity(0);
   
     if (keyA.isDown) {
-      player.setVelocityX(-50);
+      this.player.setVelocityX(-50);
     } else if (keyD.isDown) {
-      player.setVelocityX(50);
+      this.player.setVelocityX(50);
     }
   
     if (keyW.isDown) {
-      player.setVelocityY(-50);
+      this.player.setVelocityY(-50);
     } else if (keyS.isDown) {
-      player.setVelocityY(50);
+      this.player.setVelocityY(50);
     }
 }
 

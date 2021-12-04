@@ -30,8 +30,8 @@ gameScene.create = function() {
 
     // adding enemies for scaling purposes, location is obviously not finalized
     this.rocket = this.add.sprite(50, 650, 'rocket');
-    this.asteroid1 = this.add.sprite(50, 600, 'asteroid1');
-    this.asteroid2 = this.add.sprite(50, 550, 'asteroid2');
+    this.asteroid1 = this.add.sprite(50, 550, 'asteroid1');
+    this.asteroid2 = this.add.sprite(50, 450, 'asteroid2');
 
     // scale up enemy sprites
     this.rocket.setScale(2.25);

@@ -1,6 +1,13 @@
 // instantiate gameScene
 let gameScene = new Phaser.Scene('Game');
 
+// key variables
+let keyA;
+let keyS;
+let keyD;
+let keyW;
+
+
 gameScene.preload = function () {
     // preloading our sprites
     this.load.image('background', 'assets/background.png');
@@ -38,34 +45,26 @@ gameScene.create = function() {
     this.asteroid1.setScale(2);
     this.asteroid2.setScale(2.);
 
-    // testing player movement, might remove
-    let keys = this.input.keyboard.addKeys("W,A,S,D");
-
-    // Same:
-    // keys = this.input.keyboard.addKeys({ W: 'W', A: 'A', S: 'S', D: 'D' });
-  
-    // Named keys:
-    // keys = this.input.keyboard.addKeys({ up: 'W', left: 'A', down: 'S', right: 'D' });
-  
-    console.log("keys", keys);
-  
-    player = this.physics.add.image(200, 150, "player");
-    player.setCollideWorldBounds(true);
+    // WASD movement
+    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     }
   
   function update() {
     player.setVelocity(0);
   
-    if (keys.A.isDown) {
-      player.setVelocityX(-300);
-    } else if (keys.D.isDown) {
-      player.setVelocityX(300);
+    if (keyA.isDown) {
+      player.setVelocityX(-50);
+    } else if (keyD.isDown) {
+      player.setVelocityX(50);
     }
   
-    if (keys.W.isDown) {
-      player.setVelocityY(-300);
-    } else if (keys.S.isDown) {
-      player.setVelocityY(300);
+    if (keyW.isDown) {
+      player.setVelocityY(-50);
+    } else if (keyS.isDown) {
+      player.setVelocityY(50);
     }
 }
 

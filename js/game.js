@@ -51,7 +51,7 @@ gameScene.create = function() {
   
     player = this.physics.add.image(200, 150, "player");
     player.setCollideWorldBounds(true);
-    
+    }
   
   function update() {
     player.setVelocity(0);

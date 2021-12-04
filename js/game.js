@@ -43,7 +43,7 @@ gameScene.create = function() {
     // scale up enemy sprites
     this.rocket.setScale(2.25);
     this.asteroid1.setScale(2);
-    this.asteroid2.setScale(2.);
+    this.asteroid2.setScale(2);
 
     // WASD movement
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);

@@ -45,33 +45,30 @@ gameScene.create = function() {
     this.asteroid1.setScale(2);
     this.asteroid2.setScale(2);
 
-    // WASD movement... does not work right now
-    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-
+    // assign keys
+    this.keys = this.input.keyboard.addKeys({
+        a:  Phaser.Input.Keyboard.KeyCodes.A,
+        s:  Phaser.Input.Keyboard.KeyCodes.S,
+        d:  Phaser.Input.Keyboard.KeyCodes.D,
+        w:  Phaser.Input.Keyboard.KeyCodes.W
+    });
 }
   
-  function update() { // this goes along with the WASD movement in create(), does not work. if someone wanted to try to work on it that would be awesome.
-    this.player.setVelocity(0);
-  
-    if (keyA.isDown) {
-      this.player.setVelocityX(-50);
-    } else if (keyD.isDown) {
-      this.player.setVelocityX(50);
+gameScene.update = function() {
+    // left/right movement
+    if (this.keys.a.isDown) {
+      this.player.x -= 2;
+    } else if (this.keys.d.isDown) {
+      this.player.x += 2;
     }
-  
-    if (keyW.isDown) {
-      this.player.setVelocityY(-50);
-    } else if (keyS.isDown) {
-      this.player.setVelocityY(50);
+
+    // up/down movement
+    if (this.keys.w.isDown) {
+        this.player.y -= 2;
+    } else if (this.keys.s.isDown) {
+        this.player.y += 2;
     }
 }
-
-
-
-
 
 // game config
 let config = {

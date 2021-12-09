@@ -14,6 +14,7 @@ let EnemiesDefeated = 0;
 
 gameScene.preload = function () {
     // preloading our sprites
+
     this.load.image('background', 'assets/background.png');
 
     this.load.image('player', 'assets/frog.png');
@@ -26,20 +27,19 @@ gameScene.preload = function () {
 
     this.load.image('finish', "assets/finishLine.png");
 
+
 }
 
 gameScene.create = function() {
     // adding background to page
     let background = this.add.sprite(0,0, 'background');
 
+    this.physics.world.setBounds(0, 0, config.width, config.height, true, true, true, true);
+
     // setting origin to top left
     background.setOrigin(0,0);
 
-    // adding player
-    this.player = this.add.sprite(180, 720, 'player');
 
-    // scale up player sprite
-    this.player.setScale(1.5);
 
     //enemy groups
     //this group is for purposes of detecting being hit
@@ -48,6 +48,8 @@ gameScene.create = function() {
     this.rockets = game.add.group();
     this.asteroid1s = game.add.group();
     this.asteroid2s = game.add.group();
+
+
 
     // adding enemies for scaling purposes, location is obviously not finalized
     this.rocket = this.add.sprite(50, 650, 'rocket');
@@ -66,6 +68,13 @@ gameScene.create = function() {
         d:  Phaser.Input.Keyboard.KeyCodes.D,
         w:  Phaser.Input.Keyboard.KeyCodes.W
     });
+
+    // adding player
+    this.player = this.add.sprite(180, 720, 'player');
+    this.player.setCollideWorldBounds(true);
+    this.player.onWorldBounds = true;
+    // scale up player sprite
+    this.player.setScale(1.5);
 }
   
 gameScene.update = function() {
@@ -82,6 +91,7 @@ gameScene.update = function() {
     } else if (this.keys.s.isDown) {
         this.player.y += 2;
     }
+
 }
 
 // add enemies
@@ -124,7 +134,13 @@ let config = {
     type: Phaser.AUTO,
     width: 360,
     height: 750,
-    scene: gameScene
+    scene: gameScene,
+    physics: {
+        default: "arcade",
+        arcade: {
+            debug: true
+        }
+    }
 };
 
 // game creation

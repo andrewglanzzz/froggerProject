@@ -7,6 +7,10 @@ let keyS;
 let keyD;
 let keyW;
 
+//enemy variables
+let enemiesOnScreen = 0;
+let EnemiesDefeated = 0;
+
 
 gameScene.preload = function () {
     // preloading our sprites
@@ -19,6 +23,8 @@ gameScene.preload = function () {
     this.load.image('asteroid1', 'assets/asteroid1.png');
 
     this.load.image('asteroid2', 'assets/asteroid2.png');
+
+    this.load.image('finish', "assets/finishLine.png");
 
 }
 
@@ -34,6 +40,14 @@ gameScene.create = function() {
 
     // scale up player sprite
     this.player.setScale(1.5);
+
+    //enemy groups
+    //this group is for purposes of detecting being hit
+    this.enemies = game.add.group();
+    //these groups are for movement since different enemies should have different speeds
+    this.rockets = game.add.group();
+    this.asteroid1s = game.add.group();
+    this.asteroid2s = game.add.group();
 
     // adding enemies for scaling purposes, location is obviously not finalized
     this.rocket = this.add.sprite(50, 650, 'rocket');
@@ -70,6 +84,41 @@ gameScene.update = function() {
     }
 }
 
+// add enemies
+gameScene.addEnemy = function(){
+    if (enemiesOnScreen < 5){
+        for (let i = enemiesOnScreen; i < 5; i++){
+            this.RandomEnemy();
+        }
+    }
+}
+
+//random enemy generation
+gameScene.RandomEnemy = function(){
+    var xcoord;
+    var ycoord;
+    var rand = Math.floor(Math.random() * 2);
+    var enemy;
+    switch (rand){
+         case 0:
+             enemy = game.add.sprite(xcoord, ycoord, 'asteroid1');
+             break;
+         case 1:
+             enemy = game.add.sprite(xcoord, ycoord, 'asteroid2');
+             break;
+         case 2:
+             enemy = game.add.sprite(xcoord, ycoord, 'rocket');
+             break;
+     }
+    enemiesOnScreen++;
+    this.enemies.add(enemy);
+}
+
+//Enemy movement, designed to be called by the update function
+gameScene.moveEnemies = function(){
+    //Enemy movement goes here
+}
+
 // game config
 let config = {
     type: Phaser.AUTO,
@@ -80,3 +129,4 @@ let config = {
 
 // game creation
 let game = new Phaser.Game(config);
+

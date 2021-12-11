@@ -1,12 +1,6 @@
 // instantiate gameScene
 let gameScene = new Phaser.Scene('Game');
 
-// key variables
-let keyA;
-let keyS;
-let keyD;
-let keyW;
-
 //enemy variables
 let enemiesOnScreen = 0;
 let enemiesDefeated = 0;
@@ -68,8 +62,7 @@ gameScene.update = function() {
 
     }
 
-    this.addEnemy();
-    this.moveEnemies();
+    this.addEnemy();  
 }
 
 // add enemies
@@ -81,10 +74,10 @@ gameScene.addEnemy = function(){
 
 //random enemy generation
 gameScene.RandomEnemy = function(){
-    var xcoord = Math.floor(Math.random() * (350 - 1 + 1) + 1);
-    var ycoord = 20;
-    var rand = Math.floor(Math.random() * 3);
-    var enemy;
+    let xcoord = Math.floor(Math.random() * (350 - 1 + 1) + 1);
+    let ycoord = 20;
+    let rand = Math.floor(Math.random() * 3);
+    let enemy;
 
     switch (rand){
          case 0:
@@ -99,11 +92,12 @@ gameScene.RandomEnemy = function(){
     }
 
     enemiesOnScreen++;
-    enemy.setVelocity(1);
-    this.enemies.add(enemy);
 
+    this.enemies.add(enemy);
+    let vel = Math.floor(Math.random() * (100 - 50 + 50) + 50);
+    enemy.setVelocity(vel, vel);
     enemy.setCollideWorldBounds(true);
-    enemy.setBounce(1);
+    enemy.setBounce(1,1);
 }
 
 //Enemy movement, designed to be called by the update function
@@ -113,12 +107,12 @@ gameScene.moveEnemies = function() {
     let numEnemies = enemies.length;
 
     for (let i = 0; i < numEnemies; i++) {
-        enemies[i].x += 1;
-        enemies[i].y += 1;
+        enemies[i].x += enemies[i].speed;
+        enemies[i].y += enemies[i].speed;
 
-        if (enemies[i].x >= this.enemyMaxX && enemies[i].speed > 0) {
+        if (enemies[i].x >= 359) {
             enemies[i].x *= -1;
-        } else if (enemies[i].x <= this.enemyMinX && enemies[i].speed < 0) {
+        } else if (enemies[i].x <= 0) {
             enemies[i].x *= 1;
         }
     }

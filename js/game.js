@@ -150,7 +150,9 @@ gameScene.restartGame = function(player, enemy) {
     gameScene.destroyEnemies();
     let x = config.width / 2 - 8;
     let y = config.height + 60;
-    this.player.enableBody(true, x, y, true, true);    
+    this.player.enableBody(true, x, y, true, true);
+    this.checkEnemiesDefeated();
+    enemiesDefeated = 0;
     this.finish.setPosition(180, -20);
 
     

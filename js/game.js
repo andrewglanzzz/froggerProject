@@ -28,6 +28,9 @@ gameScene.create = function() {
     // adding background music
     var music = this.sound.add('backgroundMusic');
 
+    // loop music 
+    music.loop = true;
+    
     // play music 
     music.play();
 

@@ -32,7 +32,7 @@ gameScene.create = function() {
 
     this.finish = this.physics.add.sprite(180, -20, 'finish');
     this.finish.setScale(3.5);
-
+  
     //enemy groups
     //this group is for purposes of detecting being hit
     this.enemies = this.physics.add.group();
@@ -51,7 +51,8 @@ gameScene.create = function() {
 
     //Collider for frog/enemy collision
     this.physics.add.collider(this.player, this.enemies, gameScene.hitEnemy, null, gameScene);
-    this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);
+    this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);    
+    this.physics.add.collider(this.player, this.finish, this.restartGame, null, gameScene);
 }
 
 gameScene.update = function() {
@@ -139,6 +140,7 @@ gameScene.checkEnemiesDefeated = function() {
         this.finish.speed = .5;
         this.finish.y += .5;
     }
+    //console.log(enemiesDefeated); 
 }
 
 // restart game
@@ -148,7 +150,9 @@ gameScene.restartGame = function(player, enemy) {
     gameScene.destroyEnemies();
     let x = config.width / 2 - 8;
     let y = config.height + 60;
-    this.player.enableBody(true, x, y, true, true);
+    this.player.enableBody(true, x, y, true, true);    
+    this.finish.setPosition(180, -20);
+
     
     //gameScene.RandomEnemy();
 
@@ -156,9 +160,13 @@ gameScene.restartGame = function(player, enemy) {
 
 // When the player hits an enemy..
 gameScene.hitEnemy = function(player, enemy) {
+    this.checkEnemiesDefeated();
+    enemiesDefeated = 0;
+    //console.log("Player hit!");
     this.resetEnemy(enemy);
     this.player.disableBody();
     this.restartGame();
+    this.finish.setPosition(180, -20);
 }
 
 gameScene.resetEnemy = function(enemies) {

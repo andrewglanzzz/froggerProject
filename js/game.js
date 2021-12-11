@@ -135,7 +135,7 @@ gameScene.getRandomX = function() {
 }
 
 gameScene.checkEnemiesDefeated = function() {
-    if (enemiesDefeated >= 100) {
+    if (enemiesDefeated >= 10) {
         this.finish.speed = .5;
         this.finish.y += .5;
     }
@@ -164,6 +164,7 @@ gameScene.hitEnemy = function(player, enemy) {
 gameScene.resetEnemy = function(enemies) {
     enemies.y = 0;
     enemies.x = this.getRandomX();
+    this.setRandomVelocity(enemies);
 }
 
 gameScene.destroyEnemies = function(enemies) {

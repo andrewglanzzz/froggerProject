@@ -30,6 +30,9 @@ gameScene.create = function() {
     this.player.setScale(1.5);
     this.player.setCollideWorldBounds(true);
 
+    this.finish = this.physics.add.sprite(180, -20, 'finish');
+    this.finish.setScale(3.5);
+
     //enemy groups
     //this group is for purposes of detecting being hit
     this.enemies = this.physics.add.group();
@@ -57,13 +60,14 @@ gameScene.update = function() {
 
     // up/down movement
     if (this.keys.w.isDown) {
-
+        this.player.y -= .2;
     } else if (this.keys.s.isDown) {
-
+        this.player.y += .2;
     }
 
     this.addEnemy();
     this.checkEnemyBottomBound();
+    this.checkEnemiesDefeated();
 }
 
 // add enemies
@@ -110,6 +114,7 @@ gameScene.checkEnemyBottomBound = function() {
         if (enemies[i].y >= 720) {
             this.setRandomVelocity(enemies[i]);
             enemies[i].y = 0;
+            enemiesDefeated++;
             enemies[i].x = this.getRandomX();
         }
     }
@@ -117,11 +122,19 @@ gameScene.checkEnemyBottomBound = function() {
 
 gameScene.setRandomVelocity = function(enemy) {
     let vel = Math.floor(Math.random() * (100 - 50 + 50) + 50);
+    vel *= Math.round(Math.random()) ? 1 : -1;
     enemy.setVelocity(vel, vel);
 }
 
 gameScene.getRandomX = function() {
     return Math.floor(Math.random() * (350 - 1 + 1) + 1);
+}
+
+gameScene.checkEnemiesDefeated = function() {
+    if (enemiesDefeated >= 100) {
+        this.finish.speed = .5;
+        this.finish.y += .5;
+    }
 }
 
 // game config

@@ -74,7 +74,7 @@ gameScene.update = function() {
 
 // add enemies
 gameScene.addEnemy = function(){
-    if (enemiesOnScreen < 5){
+    if (enemiesOnScreen < 5) {
             this.RandomEnemy();
     }
 }
@@ -100,8 +100,10 @@ gameScene.RandomEnemy = function(){
 
     enemiesOnScreen++;
     enemy.setVelocity(1);
-    enemy.setCollideWorldBounds(true);
     this.enemies.add(enemy);
+
+    enemy.setCollideWorldBounds(true);
+    enemy.setBounce(1);
 }
 
 //Enemy movement, designed to be called by the update function
@@ -115,9 +117,9 @@ gameScene.moveEnemies = function() {
         enemies[i].y += 1;
 
         if (enemies[i].x >= this.enemyMaxX && enemies[i].speed > 0) {
-            enemies[i].speed *= -1;
-        } else if (enemies[i].y <= this.enemyMinX && enemies[i].speed < 0) {
-            enemies[i].speed *= 1;
+            enemies[i].x *= -1;
+        } else if (enemies[i].x <= this.enemyMinX && enemies[i].speed < 0) {
+            enemies[i].x *= 1;
         }
     }
 }

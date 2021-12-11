@@ -24,7 +24,7 @@ gameScene.create = function() {
     background.setOrigin(0,0);
 
     // adding player
-    this.player = this.physics.add.sprite(180, 720, 'player');
+    this.player = this.physics.add.sprite(180, 700, 'player');
 
     // scale up player sprite
     this.player.setScale(1.5);
@@ -46,13 +46,13 @@ gameScene.create = function() {
         w:  Phaser.Input.Keyboard.KeyCodes.W
     });
 }
-  
+
 gameScene.update = function() {
     // left/right movement
     if (this.keys.a.isDown) {
-      this.player.x -= 5;
+      this.player.x -= 3;
     } else if (this.keys.d.isDown) {
-      this.player.x += 5;
+      this.player.x += 3;
     }
 
     // up/down movement
@@ -62,19 +62,20 @@ gameScene.update = function() {
 
     }
 
-    this.addEnemy();  
+    this.addEnemy();
+    this.checkEnemyBottomBound();
 }
 
 // add enemies
 gameScene.addEnemy = function(){
-    if (enemiesOnScreen < 5) {
+    if (enemiesOnScreen < 7) {
             this.RandomEnemy();
     }
 }
 
 //random enemy generation
 gameScene.RandomEnemy = function(){
-    let xcoord = Math.floor(Math.random() * (350 - 1 + 1) + 1);
+    let xcoord = this.getRandomX();
     let ycoord = 20;
     let rand = Math.floor(Math.random() * 3);
     let enemy;
@@ -94,28 +95,33 @@ gameScene.RandomEnemy = function(){
     enemiesOnScreen++;
 
     this.enemies.add(enemy);
-    let vel = Math.floor(Math.random() * (100 - 50 + 50) + 50);
-    enemy.setVelocity(vel, vel);
-    enemy.setCollideWorldBounds(true);
+    this.setRandomVelocity(enemy);
+    enemy.body.setCollideWorldBounds(true);
     enemy.setBounce(1,1);
 }
 
 //Enemy movement, designed to be called by the update function
-gameScene.moveEnemies = function() {
+gameScene.checkEnemyBottomBound = function() {
     //Enemy movement goes here
     let enemies = this.enemies.getChildren();
     let numEnemies = enemies.length;
 
     for (let i = 0; i < numEnemies; i++) {
-        enemies[i].x += enemies[i].speed;
-        enemies[i].y += enemies[i].speed;
-
-        if (enemies[i].x >= 359) {
-            enemies[i].x *= -1;
-        } else if (enemies[i].x <= 0) {
-            enemies[i].x *= 1;
+        if (enemies[i].y >= 720) {
+            this.setRandomVelocity(enemies[i]);
+            enemies[i].y = 0;
+            enemies[i].x = this.getRandomX();
         }
     }
+}
+
+gameScene.setRandomVelocity = function(enemy) {
+    let vel = Math.floor(Math.random() * (100 - 50 + 50) + 50);
+    enemy.setVelocity(vel, vel);
+}
+
+gameScene.getRandomX = function() {
+    return Math.floor(Math.random() * (350 - 1 + 1) + 1);
 }
 
 // game config

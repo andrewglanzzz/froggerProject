@@ -48,6 +48,10 @@ gameScene.create = function() {
         d:  Phaser.Input.Keyboard.KeyCodes.D,
         w:  Phaser.Input.Keyboard.KeyCodes.W
     });
+
+    //Collider for frog/enemy collision
+    this.physics.add.collider(this.player, this.enemies, gameScene.hitEnemy, null, gameScene);
+    this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);
 }
 
 gameScene.update = function() {
@@ -134,6 +138,39 @@ gameScene.checkEnemiesDefeated = function() {
     if (enemiesDefeated >= 100) {
         this.finish.speed = .5;
         this.finish.y += .5;
+    }
+}
+
+// restart game
+gameScene.restartGame = function(player, enemy) {
+    // do something
+    //this.gameScene.destroy();
+    gameScene.destroyEnemies();
+    let x = config.width / 2 - 8;
+    let y = config.height + 60;
+    this.player.enableBody(true, x, y, true, true);
+    
+    //gameScene.RandomEnemy();
+
+}
+
+// When the player hits an enemy..
+gameScene.hitEnemy = function(player, enemy) {
+    this.resetEnemy(enemy);
+    this.player.disableBody();
+    this.restartGame();
+}
+
+gameScene.resetEnemy = function(enemies) {
+    enemies.y = 0;
+    enemies.x = this.getRandomX();
+}
+
+gameScene.destroyEnemies = function(enemies) {
+    this.enemies.getChildren();
+
+    for (let i = 5; i < enemies; i--) {
+        enemies.destroy(i);
     }
 }
 

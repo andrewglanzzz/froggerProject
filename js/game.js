@@ -9,7 +9,7 @@ let keyW;
 
 //enemy variables
 let enemiesOnScreen = 0;
-let EnemiesDefeated = 0;
+let enemiesDefeated = 0;
 
 
 gameScene.preload = function () {

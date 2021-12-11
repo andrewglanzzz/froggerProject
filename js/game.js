@@ -14,6 +14,8 @@ gameScene.preload = function () {
     this.load.image('asteroid1', 'assets/asteroid1.png');
     this.load.image('asteroid2', 'assets/asteroid2.png');
     this.load.image('finish', "assets/finishLine.png");
+
+    this.load.audio('backgroundMusic', "assets/BGM.wav");
 }
 
 gameScene.create = function() {
@@ -22,6 +24,12 @@ gameScene.create = function() {
 
     // setting origin to top left
     background.setOrigin(0,0);
+
+    // adding background music
+    var music = this.sound.add('backgroundMusic');
+
+    // play music 
+    music.play();
 
     // adding player
     this.player = this.physics.add.sprite(180, 700, 'player');
@@ -53,6 +61,8 @@ gameScene.create = function() {
     this.physics.add.collider(this.player, this.enemies, gameScene.hitEnemy, null, gameScene);
     this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);    
     this.physics.add.collider(this.player, this.finish, this.restartGame, null, gameScene);
+
+
 }
 
 gameScene.update = function() {
